@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mongo:
+    volumes:
+      - ./data/mongo:/data/db
+      - ./scripts:/scripts
+    image: mongo:4.4
+    container_name: mongo
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: RxqfeKna_rNsq7FI7f3MdQ
+    ports:
+    - 27017:27017
