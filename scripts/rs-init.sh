@@ -1,10 +1,12 @@
 #!/bin/bash
 
-user=""
-db=""
-password=""
+user=$USER
+db=$DB
+password=$PASSWORD
 
-mongo <<EOF
+echo $PASSWORD
+
+mongosh <<EOF
 var config = {
     "_id": "rs0",
     "version": 1,
@@ -23,13 +25,16 @@ EOF
 sleep 2
 
 
-mongo <<EOF
-   use ${db};
-   admin = db.getSiblingDB("${db}");
-   admin.createUser(
+mongosh <<EOF
+   db = db.getSiblingDB("${db}");
+   db.createUser(
     {
 	    user: "${user}",
         pwd: "${password}",
         roles: [ { role: "readWrite", db: "${db}" } ]
     });
+EOF
+
+mongosh <<EOF
+    db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
 EOF
