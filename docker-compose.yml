@@ -3,7 +3,7 @@ services:
   mongo:
     volumes:
       - ./data/mongo:/data/db
-      - ./scripts:/scripts
+      - ./scripts:/data/db/scripts
     image: mongo:5.0.5
     container_name: mongo
     restart: always
