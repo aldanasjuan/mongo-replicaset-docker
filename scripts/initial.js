@@ -1,9 +1,3 @@
-db = db.getSiblingDB(_getEnv("DB"));
-db.createUser(
- {
-     user: _getEnv("USER"),
-     pwd: _getEnv("PASSWORD"),
-     roles: [ { role: "readWrite", db: _getEnv("DB") } ]
- });
-
- db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
+db = db.getSiblingDB(process.env.MONGO_DB);
+db.createUser({user: process.env.MONGO_USER,pwd: process.env.MONGO_PASSWORD,roles: [ { role: "readWrite", db: process.env.MONGO_DB } ]});
+db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )

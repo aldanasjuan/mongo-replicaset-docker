@@ -9,8 +9,8 @@ services:
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
     environment:
-      USER: ${USER}
-      DB: ${DB}
-      PASSWORD: ${PASSWORD}
+      MONGO_USER: ${MONGO_USER}
+      MONGO_DB: ${MONGO_DB}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
     ports:
     - 27017:27017
